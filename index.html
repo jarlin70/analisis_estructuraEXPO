@@ -885,7 +885,6 @@
                 <div class="highlight">
                     <h3>Valores Críticos</h3>
                     <ul>
-                    
                         <li><strong>Máxima deformación vertical:</strong> -82.5 mm (carga de servicio)</li>
                         <li><strong>Máximo desplazamiento horizontal sísmico:</strong> 4.758e-02 unidades</li>
                         <li><strong>Reacciones máximas:</strong>
@@ -1768,124 +1767,130 @@
             </div>
         </div>
         
+        <div class="slide" id="conclusiones">
 
+    <style>
+        .conclusions-table-container {
+            padding: 15px;
+            background-color: #ffffff; /* Fondo blanco para el contenedor */
+        }
 
+        .conclusions-table {
+            width: 100%;
+            border-collapse: collapse; /* Bordes limpios y unidos */
+            margin-top: 20px;
+            font-size: 15px; /* Tamaño de fuente base */
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra sutil para dar profundidad */
+            border-radius: 8px; /* Bordes redondeados */
+            overflow: hidden; /* Necesario para que el border-radius afecte a los encabezados */
+        }
 
-                <div class="slide" id="conclusiones">
+        .conclusions-table th,
+        .conclusions-table td {
+            padding: 16px 20px;
+            text-align: left;
+            vertical-align: top; /* Alinea el contenido arriba, útil para celdas con listas */
+            border-bottom: 1px solid #e0e0e0; /* Línea separadora de filas muy sutil */
+        }
 
-            <style>
-                .conclusions-table-container {
-                    padding: 15px;
-                    background-color: #ffffff; /* Fondo blanco para el contenedor */
-                }
+        .conclusions-table thead th {
+            background-color: #34495e; /* Azul oscuro/gris formal para el encabezado */
+            color: #ffffff; /* Texto blanco */
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        
+        .conclusions-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa; /* Color gris muy claro para filas pares */
+        }
 
-                .conclusions-table {
-                    width: 100%;
-                    border-collapse: collapse; /* Bordes limpios y unidos */
-                    margin-top: 20px;
-                    font-size: 15px; /* Tamaño de fuente base */
-                    font-family: Arial, sans-serif;
-                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra sutil para dar profundidad */
-                    border-radius: 8px; /* Bordes redondeados */
-                    overflow: hidden; /* Necesario para que el border-radius afecte a los encabezados */
-                }
+        .conclusions-table tbody tr:hover {
+            background-color: #f1f1f1; /* Efecto hover para resaltar la fila */
+        }
 
-                .conclusions-table th,
-                .conclusions-table td {
-                    padding: 16px 20px;
-                    text-align: left;
-                    vertical-align: top; /* Alinea el contenido arriba, útil para celdas con listas */
-                    border-bottom: 1px solid #e0e0e0; /* Línea separadora de filas muy sutil */
-                }
+        .conclusions-table td:first-child {
+            font-weight: 600; /* Hace que la primera columna actúe como título de fila */
+            color: #2c3e50;
+            width: 25%; /* Ancho fijo para la primera columna */
+        }
 
-                .conclusions-table thead th {
-                    background-color: #34495e; /* Azul oscuro/gris formal para el encabezado */
-                    color: #ffffff; /* Texto blanco */
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    font-size: 14px;
-                    letter-spacing: 0.5px;
-                }
-                
-                .conclusions-table tbody tr:nth-child(even) {
-                    background-color: #f8f9fa; /* Color gris muy claro para filas pares */
-                }
+        .conclusions-table ul {
+            margin: 0;
+            padding-left: 20px; /* Indentación para la lista */
+            list-style-position: outside;
+        }
 
-                .conclusions-table tbody tr:hover {
-                    background-color: #f1f1f1; /* Efecto hover para resaltar la fila */
-                }
+        .conclusions-table li {
+            margin-bottom: 8px; /* Espacio entre los puntos de la lista */
+        }
+        
+        .conclusions-table li:last-child {
+            margin-bottom: 0;
+        }
 
-                .conclusions-table td:first-child {
-                    font-weight: 600; /* Hace que la primera columna actúe como título de fila */
-                    color: #2c3e50;
-                    width: 25%; /* Ancho fijo para la primera columna */
-                }
-
-                .conclusions-table ul {
-                    margin: 0;
-                    padding-left: 20px; /* Indentación para la lista */
-                    list-style-position: outside;
-                }
-
-                .conclusions-table li {
-                    margin-bottom: 8px; /* Espacio entre los puntos de la lista */
-                }
-                
-                .conclusions-table li:last-child {
-                    margin-bottom: 0;
-                }
-
-            </style>
+    </style>
 
             <div class="section-title">
-                <h2>Conclusiones del Análisis de Caso</h2>
-                <p>Lecciones del colapso estructural de Real Plaza Trujillo</p>
+                    <h2>Conclusiones del Análisis de Caso</h2>
+                    <p>Lecciones del colapso estructural de Real Plaza Trujillo</p>
+                </div>
+                
+                <div class="conclusions-table-container">
+                    <table class="conclusions-table">
+                        <thead>
+                            <tr>
+                                <th>Área de Análisis</th>
+                                <th>Conclusiones Clave</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Diseño y Análisis Inicial</td>
+                                <td>
+                                    <ul>
+                                        <li>El diseño original superaba los requisitos de seguridad de la normativa, incluyendo una amplificación de cargas del 40%.</li>
+                                        <li>Contaba con elementos robustos, como un anillo con una fuerza de postensado de más de 148 toneladas.</li>
+                                        <li>El proyecto sufrió más de 50 modificaciones, indicando un proceso de alta complejidad y cambios continuos.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Causas del Colapso</td>
+                                <td>
+                                    <ul>
+                                        <li>La causa principal fue la <strong>corrosión severa</strong> por falta de inspección y mantenimiento durante 8 años.</li>
+                                        <li>Un factor crítico fue la adición tardía de pesados elementos decorativos no documentados que duplicaron la carga.</li>
+                                        <li>El diseño final dejó la estructura completamente cerrada, impidiendo físicamente cualquier inspección.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Recomendaciones y Lecciones</td>
+                                <td>
+                                    <ul>
+                                        <li>Es imperativo incluir protocolos obligatorios de mantenimiento e inspección en los códigos de construcción.</li>
+                                        <li>Los proyectos "Fast Track" requieren una gestión de riesgos y supervisión por personal experto mucho más rigurosa.</li>
+                                        <li>Los estándares técnicos deben ser definidos por ingenieros y arquitectos para garantizar la seguridad a largo plazo.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             
-            <div class="conclusions-table-container">
-                <table class="conclusions-table">
-                    <thead>
-                        <tr>
-                            <th>Área de Análisis</th>
-                            <th>Conclusiones Clave</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Diseño y Análisis Inicial</td>
-                            <td>
-                                <ul>
-                                    <li>El diseño original superaba los requisitos de seguridad de la normativa, incluyendo una amplificación de cargas del 40%.</li>
-                                    <li>Contaba con elementos robustos, como un anillo con una fuerza de postensado de más de 148 toneladas.</li>
-                                    <li>El proyecto sufrió más de 50 modificaciones, indicando un proceso de alta complejidad y cambios continuos.</li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Causas del Colapso</td>
-                            <td>
-                                <ul>
-                                    <li>La causa principal fue la <strong>corrosión severa</strong> por falta de inspección y mantenimiento durante 8 años.</li>
-                                    <li>Un factor crítico fue la adición tardía de pesados elementos decorativos no documentados que duplicaron la carga.</li>
-                                    <li>El diseño final dejó la estructura completamente cerrada, impidiendo físicamente cualquier inspección.</li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Recomendaciones y Lecciones</td>
-                            <td>
-                                <ul>
-                                    <li>Es imperativo incluir protocolos obligatorios de mantenimiento e inspección en los códigos de construcción.</li>
-                                    <li>Los proyectos "Fast Track" requieren una gestión de riesgos y supervisión por personal experto mucho más rigurosa.</li>
-                                    <li>Los estándares técnicos deben ser definidos por ingenieros y arquitectos para garantizar la seguridad a largo plazo.</li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="slide-footer">
+                <div class="footer-content">
+                    <p>Proyecto desarrollado por UTEC - Análisis de cubierta metálica</p>
+                    <p class="sap-logo">SAP 2000 v25.0.0</p>
+                </div>
             </div>
         </div>
-        
+    </div>
+    
     <!-- Controles de presentación -->
     <div class="presentation-controls">
         <button class="control-btn-presentation" id="prev-btn">
