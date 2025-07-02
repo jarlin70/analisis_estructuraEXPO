@@ -772,6 +772,11 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+
+
+
+
         }
     </style>
 </head>
@@ -1759,6 +1764,12 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="slide-footer">
+                <div class="footer-content">
+                    <p>Proyecto desarrollado por UTEC - Análisis de cubierta metálica</p>
+                </div>
+            </div>
         </div>
         
         <div class="slide" id="conclusiones">
@@ -1877,7 +1888,10 @@
             </div>
             
             <div class="slide-footer">
-                
+                <div class="footer-content">
+                    <p>Proyecto desarrollado por UTEC - Análisis de cubierta metálica</p>
+                    <p class="sap-logo">SAP 2000 v25.0.0</p>
+                </div>
             </div>
         </div>
     </div>
@@ -2139,5 +2153,136 @@
         // Iniciar presentación al cargar la página
         window.addEventListener('load', initPresentation);
     </script>
+  <!-- Código del puntero láser corregido -->
+     <style>
+        /* Puntero láser de alto contraste */
+        .laser-pointer {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: 
+                transform 0.05s ease-out,
+                box-shadow 0.3s ease;
+            
+            /* Diseño de alto contraste mejorado */
+            background: #0066cc;
+            border: 2px solid white;
+            box-shadow: 
+                0 0 0 2px #0066cc,
+                0 0 15px 8px rgba(0, 102, 204, 0.8),
+                inset 0 0 0 6px rgba(255, 255, 255, 0.3);
+            
+            /* Inicialmente oculto */
+            opacity: 0;
+        }
+        
+        .laser-pointer.active {
+            opacity: 1;
+        }
+        
+        .laser-pointer::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Ocultar cursor normal solo cuando el láser esté activo */
+        body.laser-active {
+            cursor: none !important;
+        }
+        
+        body.laser-active * {
+            cursor: none !important;
+        }
+        
+        /* Ajuste para imágenes en modal */
+        .modal .laser-pointer {
+            z-index: 999999;
+        }
+    </style>
+
+    <script>
+        // Crear y mover el puntero láser mejorado
+        function initLaserPointer() {
+            // Crear elemento del puntero
+            const laser = document.createElement('div');
+            laser.classList.add('laser-pointer');
+            document.body.appendChild(laser);
+            
+            // Activar el puntero después de un pequeño delay
+            setTimeout(() => {
+                laser.classList.add('active');
+                document.body.classList.add('laser-active');
+            }, 100);
+            
+            // Actualizar posición del puntero
+            document.addEventListener('mousemove', function(e) {
+                laser.style.left = e.clientX + 'px';
+                laser.style.top = e.clientY + 'px';
+            });
+            
+            // Efecto al hacer clic
+            document.addEventListener('mousedown', function() {
+                laser.style.transform = 'translate(-50%, -50%) scale(1.3)';
+                laser.style.background = '#ff0000';
+                laser.style.borderColor = 'white';
+                laser.style.boxShadow = 
+                    '0 0 0 2px #ff0000, ' +
+                    '0 0 20px 10px rgba(255, 0, 0, 0.7), ' +
+                    'inset 0 0 0 6px rgba(255, 255, 255, 0.4)';
+            });
+            
+            document.addEventListener('mouseup', function() {
+                laser.style.transform = 'translate(-50%, -50%) scale(1)';
+                laser.style.background = '#0066cc';
+                laser.style.borderColor = 'white';
+                laser.style.boxShadow = 
+                    '0 0 0 2px #0066cc, ' +
+                    '0 0 15px 8px rgba(0, 102, 204, 0.8), ' +
+                    'inset 0 0 0 6px rgba(255, 255, 255, 0.3)';
+            });
+            
+            // Asegurar visibilidad en modal de pantalla completa
+            document.addEventListener('fullscreenchange', function() {
+                if (document.fullscreenElement) {
+                    laser.style.zIndex = '2147483647';
+                } else {
+                    laser.style.zIndex = '9999';
+                }
+            });
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLaserPointer);
+        } else {
+            initLaserPointer();
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
 </body>
+
+
+
 </html>
