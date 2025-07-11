@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea de Tiempo - Vía Ramiro Prialé</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 95vw;
+            height: 90vh;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .timeline-svg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .timeline-path {
+            fill: none;
+            stroke: #ff0000;
+            stroke-width: 6;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 0, 0, 1)); }
+        }
+
+        .event {
+            position: absolute;
+            width: 180px;
+            background: #1a1a1a;
+            border: 3px solid #ff0000;
+            border-radius: 10px;
+            padding: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 0.85rem;
+        }
+
+        .event:hover {
+            transform: scale(1.1);
+            background: #2a2a2a;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+            z-index: 100;
+        }
+
+        .event-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff0000;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            animation: pulse 2s infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .year {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff0000;
+            margin-bottom: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .event-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 3px;
+            color: #ffcccc;
+        }
+
+        .event-desc {
+            font-size: 0.75rem;
+            line-height: 1.2;
+            color: #ccc;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            margin-top: 3px;
+            margin-right: 2px;
+        }
+
+        .tag-corrupcion { background: #8b0000; color: #fff; }
+        .tag-contrato { background: #ff4500; }
+        .tag-obra { background: #228b22; }
+        .tag-paralizado { background: #dc143c; }
+        .tag-legal { background: #9400d3; }
+
+        /* Posiciones de eventos ajustadas para el serpenteo */
+        .event1 { top: 15%; left: 2%; }
+        .event2 { top: 35%; left: 10%; }
+        .event3 { top: 15%; left: 20%; }
+        .event4 { top: 35%; left: 30%; }
+        .event5 { top: 15%; left: 40%; }
+        .event6 { top: 35%; left: 50%; }
+        .event7 { top: 15%; left: 60%; }
+        .event8 { top: 35%; left: 68%; }
+        .event9 { top: 55%; left: 73%; }
+        .event10 { top: 75%; left: 68%; }
+        .event11 { top: 75%; left: 58%; }
+        .event12 { top: 75%; left: 48%; }
+        .event13 { top: 75%; left: 38%; }
+        .event14 { top: 75%; left: 28%; }
+        .event15 { top: 75%; left: 18%; }
+        .event16 { top: 75%; left: 8%; }
+
+        .inicio-label {
+            position: absolute;
+            top: 12%;
+            left: 1%;
+            color: #ff0000;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .fin-label {
+            position: absolute;
+            top: 72%;
+            left: 1%;
+            color: #ff0000;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>VÍA RAMIRO PRIALÉ - CRONOLOGÍA DE CORRUPCIÓN Y PARALIZACIÓN</h1>
+        </div>
+
+        <div class="inicio-label">Inicio</div>
+        <div class="fin-label">Fin</div>
+
+        <svg class="timeline-svg" viewBox="0 0 1000 600" preserveAspectRatio="none">
+            <path class="timeline-path" d="
+                M 50,150
+                Q 200,150 300,200
+                Q 400,250 500,200
+                Q 600,150 700,200
+                Q 750,220 750,300
+                Q 750,380 700,400
+                Q 600,400 500,400
+                Q 400,400 300,400
+                Q 200,400 100,400
+                Q 50,400 50,450
+            "/>
+        </svg>
+
+        <!-- Eventos -->
+        <div class="event event1">
+            <div class="year">1990</div>
+            <div class="event-title">PROYECTO INICIAL</div>
+            <div class="event-desc">10 km existentes. Proyecto en planes.</div>
+        </div>
+        <div class="event-dot" style="top: 25%; left: 5%;"></div>
+
+        <div class="event event2">
+            <div class="year">2013</div>
+            <div class="event-title">CONTRATO CORRUPTO</div>
+            <div class="event-desc">Villarán firma con Odebrecht. 30 años, US$ 500M</div>
+            <span class="tag tag-corrupcion">CORRUPCIÓN</span>
+        </div>
+        <div class="event-dot" style="top: 20%; left: 15%;"></div>
+
+        <div class="event event3">
+            <div class="year">2014</div>
+            <div class="event-title">COBRO SIN OBRAS</div>
+            <div class="event-desc">Solo peajes. Cero obras.</div>
+            <span class="tag tag-paralizado">PARALIZADO</span>
+        </div>
+        <div class="event-dot" style="top: 23%; left: 25%;"></div>
+
+        <div class="event event4">
+            <div class="year">2015</div>
+            <div class="event-title">CASTAÑEDA - NADA</div>
+            <div class="event-desc">Sigue paralizado.</div>
+            <span class="tag tag-paralizado">PARALIZADO</span>
+        </div>
+        <div class="event-dot" style="top: 28%; left: 35%;"></div>
+
+        <div class="event event5">
+            <div class="year">2016</div>
+            <div class="event-title">INICIO + VENTA BROOKFIELD</div>
+            <div class="event-desc">Obras inician. Odebrecht vende 57% a Brookfield</div>
+            <span class="tag tag-obra">OBRA</span>
+            <span class="tag tag-contrato">VENTA</span>
+        </div>
+        <div class="event-dot" style="top: 25%; left: 45%;"></div>
+
+        <div class="event event6">
+            <div class="year">2017</div>
+            <div class="event-title">PARALIZACIÓN TOTAL</div>
+            <div class="event-desc">Marzo - Obras paralizadas.</div>
+            <span class="tag tag-paralizado">PARALIZADO</span>
+        </div>
+        <div class="event-dot" style="top: 22%; left: 55%;"></div>
+
+        <div class="event event7">
+            <div class="year">2017</div>
+            <div class="event-title">CASO LAVA JATO</div>
+            <div class="event-desc">Se revelan pagos de Odebrecht a Villarán. US$ 500 mil por Rutas de Lima</div>
+            <span class="tag tag-corrupcion">CORRUPCIÓN</span>
+            <span class="tag tag-legal">LEGAL</span>
+        </div>
+        <div class="event-dot" style="top: 40%; left: 55%;"></div>
+
+        <div class="event event8">
+            <div class="year">2018</div>
+            <div class="event-title">20% Y PARALIZADO</div>
+            <div class="event-desc">S/ 140 millones gastados. 90% terrenos liberados. Sigue paralizado.</div>
+            <span class="tag tag-paralizado">PARALIZADO</span>
+        </div>
+        <div class="event-dot" style="top: 30%; left: 65%;"></div>
+
+        <div class="event event9">
+            <div class="year">2019</div>
+            <div class="event-title">MUÑOZ - ARBITRAJES</div>
+            <div class="event-desc">Intenta resolver con arbitrajes. Obras muertas.</div>
+            <span class="tag tag-legal">LEGAL</span>
+            <span class="tag tag-paralizado">PARALIZADO</span>
+        </div>
+        <div class="event-dot" style="top: 30%; left: 72%;"></div>
+
+        <div class="event event10">
+            <div class="year">2020</div>
+            <div class="event-title">PANDEMIA - INVASIONES</div>
+            <div class="event-desc">COVID-19. Invasiones en terrenos del proyecto.</div>
+            <span class="tag tag-paralizado">PARALIZADO</span>
+        </div>
+        <div class="event-dot" style="top: 50%; left: 75%;"></div>
+
+        <div class="event event11">
+            <div class="year">2022</div>
+            <div class="event-title">LÓPEZ ALIAGA CAMPAÑA</div>
+            <div class="event-desc">Promete eliminar "peajes de la corrupción". Brookfield demanda al Estado.</div>
+            <span class="tag tag-legal">LEGAL</span>
+        </div>
+        <div class="event-dot" style="top: 67%; left: 62%;"></div>
+
+        <div class="event event12">
+            <div class="year">2023</div>
+            <div class="event-title">RESOLUCIÓN UNILATERAL</div>
+            <div class="event-desc">MML cancela contrato. Brookfield: US$ 2,700M arbitraje</div>
+            <span class="tag tag-legal">LEGAL</span>
+            <span class="tag tag-corrupcion">ARBITRAJE</span>
+        </div>
+        <div class="event-dot" style="top: 67%; left: 52%;"></div>
+
+        <div class="event event13">
+            <div class="year">2024</div>
+            <div class="event-title">EMERGENCIA</div>
+            <div class="event-desc">Declaran emergencia. Recuperan 4 km invadidos.</div>
+            <span class="tag tag-obra">OBRA</span>
+        </div>
+        <div class="event-dot" style="top: 67%; left: 42%;"></div>
+
+        <div class="event event14">
+            <div class="year">2025</div>
+            <div class="event-title">MML INAUGURA 4 KM</div>
+            <div class="event-desc">Junio - Inauguran 4 km</div>
+            <span class="tag tag-obra">OBRA</span>
+        </div>
+        <div class="event-dot" style="top: 67%; left: 32%;"></div>
+
+        <div class="event event15">
+            <div class="year">2025</div>
+            <div class="event-title">JUICIO VILLARÁN</div>
+            <div class="event-desc">Fiscalía pide 29 años. Arbitrajes siguen.</div>
+            <span class="tag tag-corrupcion">CORRUPCIÓN</span>
+            <span class="tag tag-legal">LEGAL</span>
+        </div>
+        <div class="event-dot" style="top: 67%; left: 22%;"></div>
+
+        <div class="event event16">
+            <div class="year">HOY</div>
+            <div class="event-title">RESULTADO: 4 KM EN 12 AÑOS</div>
+            <div class="event-desc">Solo 4 km de 20 km prometidos. Actualmente no se cobra peaje.</div>
+            <span class="tag tag-paralizado">FRACASO</span>
+        </div>
+        <div class="event-dot" style="top: 67%; left: 12%;"></div>
+    </div>
+
+    <script>
+        // Animación de entrada para eventos
+        const events = document.querySelectorAll('.event');
+        events.forEach((event, index) => {
+            event.style.opacity = '0';
+            event.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                event.style.transition = 'all 0.5s ease';
+                event.style.opacity = '1';
+                event.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+
+        // Efecto hover mejorado
+        events.forEach(event => {
+            event.addEventListener('mouseenter', function() {
+                this.style.zIndex = '1000';
+            });
+            event.addEventListener('mouseleave', function() {
+                this.style.zIndex = '10';
+            });
+        });
+    </script>
+</body>
+</html>
